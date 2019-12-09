@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function getData() {
+            return fetch("https://jira.rmn.com/browse/EXT-6265?jql=project%20%3D%20%22Browser%20Extension%20(US)%22%20and%20status%20changed%20FROM%20%22in%20progress%22%20TO%20%22in%20review%22", { "credentials": "include", "headers": { "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3", "accept-language": "uk-UA,uk;q=0.9,ru;q=0.8,en-US;q=0.7,en;q=0.6,pl;q=0.5", "cache-control": "no-cache", "pragma": "no-cache", "sec-fetch-mode": "navigate", "sec-fetch-site": "none", "sec-fetch-user": "?1", "upgrade-insecure-requests": "1" }, "referrerPolicy": "no-referrer-when-downgrade", "body": null, "method": "GET", "mode": "cors" }).then(res => res.text()).then(resHtml => console.log(resHtml))
+        }
+
+        function changeReviewer() {
+            let reviewers = [...document.querySelectorAll('#list > li')];
+            reviewers.push(reviewers.shift())
+            document.querySelector('#list').append(...reviewers)
+        }
+    </script>
+</head>
+
+<body>
+    <ul id='list'>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+        <li>four</li>
+        <li>five</li>
+    </ul>
+    <button onclick="getData()">Assign</button>
+</body>
+
+</html>
